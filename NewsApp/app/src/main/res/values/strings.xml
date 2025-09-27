@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">News App (Dzakiya Hakima Adila)</string>
+    <string name="news_title">Trump orders removal of Federal Reserve governor Lisa Cook</string>
+    <string name="news_article">
+        US President Donald Trump has said he will immediately remove Federal Reserve official Lisa Cook from her position, a major escalation in his battle against the US central bank.
+        He said there was "sufficient reason" to believe Cook had made false statements on mortgage agreements, and cited constitutional powers which he said allowed him to remove her.
+        In response, Cook has said Trump has no authority to fire her and she will not resign.
+        It is an unprecedented move for the president to dismiss a member of the central bank\'s leadership, and comes as Trump has put increasing pressure on the Fed — especially its chair Jerome Powell — over what he sees as an unwillingness to lower interest rates.
+        Cook is one of seven members of the Fed\'s board of governors, and in this position sits on the 12-member committee which is responsible for setting interest rates in the US.
+        She voted alongside Powell and most other members of the committee to maintain US interest rates at the Fed\'s last rate-setting meeting at the end of July.
+        She was appointed by Trump\'s predecessor, Democrat Joe Biden, in 2022 and is the first African American woman to serve in the role.
+        Trump\'s decision to remove Cook will likely raise legal questions, with experts suggesting the White House will need to demonstrate — potentially in court — that it had sufficient reason to fire her.
+        "President Trump purported to fire me \'for cause\' when no cause exists under the law, and he has no authority to do so," Cook said in a statement.
+        "I will not resign. I will continue to carry out my duties to help the American economy as I have been doing since 2022," she added.
+        "We will take whatever actions are needed to prevent [Trump\'s] attempted illegal action," Cook\'s lawyer, Abbe David Lowell, said.
+        The Federal Reserve has not yet commented on the president\'s announcement, which he made late on Monday via his social media platform Truth Social.
+        He posted a letter addressed to Cook in which he informed her of his decision to remove her from the bank\'s board of governors with immediate effect.
+        Trump has also repeatedly floated the possibility of firing Powell.
+    </string>
+</resources>
