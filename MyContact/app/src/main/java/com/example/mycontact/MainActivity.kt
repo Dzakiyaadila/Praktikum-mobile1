@@ -1,6 +1,9 @@
 package com.example.mycontact
 
+import android.content.Intent
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AlertDialog
@@ -31,9 +34,11 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         contactViewAdapter = ContactViewAdapter(
             onEdit = { contact ->  showEditDialog(contact)},
-        onDelete = { contact -> showDeleteDialog(contact)}
+        onDelete = { contact -> showConfirmDelete(contact)}
         )
         setContentView(binding.root)
+
+        setSupportActionBar(binding.toolbar)
 
         with(binding) {
             //setting recylerview
@@ -48,6 +53,25 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+    // 🔽 Tambahkan di dalam class MainActivity
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.profile_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.menu_profile -> { // ID dari item di XML menu kamu
+                val intent = Intent(this@MainActivity, ProfileActivity::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
+    // 🔽 Tambahkan di dalam class MainActivity
 
     override fun onResume() {
         super.onResume()
@@ -66,6 +90,8 @@ class MainActivity : AppCompatActivity() {
             contactViewAdapter.setItem(item)
         }
     }
+
+
 
     private fun showAddDialog() {
         val binding = FormContactBinding.inflate(layoutInflater)
@@ -109,10 +135,71 @@ class MainActivity : AppCompatActivity() {
     }
     //fungsi untuk menampilkan edit form
     private fun showEditDialog(contact: Contact) {
-    }
-    //fungsi untuk menampilkan delete dialog
-    private fun showDeleteDialog(contact: Contact) {
+        var binding = FormContactBinding.inflate(layoutInflater)
 
+        // isi form dengan data existing contact
+        binding.edtName.setText(contact.name)
+        binding.edtPhone.setText(contact.phone)
+
+        var builder = AlertDialog.Builder(this@MainActivity)
+        builder.setTitle("Edit Contact")
+        builder.setView(binding.root)
+
+        builder.setPositiveButton("Save") { dialog, which ->
+            // ambil name dan phone dari form
+            var name = binding.edtName.text.toString().trim()
+            var phone = binding.edtPhone.text.toString().trim()
+
+            if (name.isNotEmpty() && phone.isNotEmpty()) {
+                lifecycleScope.launch(Dispatchers.IO) {
+                    // update ke dabase
+                    contactDao.update(contact.copy(name = name, phone = phone))
+
+                    // minta UI untuk refresh data
+                    withContext(Dispatchers.Main) { refreshList() }
+                }
+
+                dialog.dismiss()
+            } else {
+                Toast.makeText(
+                    this@MainActivity,
+                    "Nama dan Phone harus diisi",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        }
+
+        builder.setNeutralButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        // dialog di show
+        val dialog = builder.create()
+        dialog.show()
     }
+
+    private fun showConfirmDelete(contact: Contact) {
+        val builder = AlertDialog.Builder(this@MainActivity)
+        builder.setTitle("Delete ${contact.name}?")
+
+        builder.setPositiveButton("Delete") { dialog, which ->
+            lifecycleScope.launch(Dispatchers.IO) {
+                contactDao.delete(contact)
+                withContext(Dispatchers.Main) { refreshList() }
+            }
+            dialog.dismiss()
+        }
+
+        builder.setNeutralButton("Cancel") { dialog, _ ->
+            dialog.dismiss()
+        }
+
+        val dialog = builder.create()
+        dialog.show()
+    }
+
+
+
+
 
 }

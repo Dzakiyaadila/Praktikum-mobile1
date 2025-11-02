@@ -8,21 +8,39 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
+    <!-- 🔹 Bungkus toolbar dengan AppBarLayout -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            app:title="Daftar Kontak"
+            app:titleTextColor="@android:color/white"
+            app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- 🔹 RecyclerView akan otomatis muncul di bawah Toolbar -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_contact"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="16dp"
-        />
+        app:layout_behavior="@string/appbar_scrolling_view_behavior" />
 
+    <!-- 🔹 Tombol Add tetap di pojok kanan bawah -->
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/btn_add"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="bottom|end"
-        android:layout_marginTop="16dp"
-        android:layout_margin="16dp"
         android:src="@drawable/outline_add_24"
-        />
+        android:layout_margin="16dp"/>
+
+
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

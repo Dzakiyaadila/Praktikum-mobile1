@@ -7,6 +7,7 @@ import com.example.mycontact.data.Contact
 //import com.example.mycontact.databinding.ItemCntactBinding
 import com.example.mycontact.databinding.ItemContactBinding
 
+
 class ContactViewAdapter(
     private val onEdit: (Contact) -> Unit,
     private val onDelete: (Contact) -> Unit
