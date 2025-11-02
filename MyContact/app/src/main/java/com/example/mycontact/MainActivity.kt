@@ -109,7 +109,6 @@ class MainActivity : AppCompatActivity() {
     }
     //fungsi untuk menampilkan edit form
     private fun showEditDialog(contact: Contact) {
-
     }
     //fungsi untuk menampilkan delete dialog
     private fun showDeleteDialog(contact: Contact) {
